@@ -44,7 +44,7 @@ class NeopixellightcontrolPlugin(octoprint.plugin.StartupPlugin,
 
     def update_rgb(self, colorHex, is_on):
         if(self.strip is not None):
-            rgb = self.hex_to_rgb(colorHex)
+            rgb = hex_to_rgb(colorHex)
             self._logger.info("RGB Value: " + rgb)
             r = rgb[0]
             self._logger.info("R Value: " + r)
