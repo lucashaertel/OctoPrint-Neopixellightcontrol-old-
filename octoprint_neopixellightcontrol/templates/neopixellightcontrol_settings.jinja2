@@ -1,0 +1,59 @@
+<form class="form-horizontal">
+    
+    <div class="control-group-header">
+        <h3>Neopixel Control Settings</h3>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="colorPin">{{ _('Color Pin #') }}</label>
+        <div class="controls">
+            <input type="number" class="input-block-level" id="colorPin" data-bind="value: settings.plugins.neopixellightcontrol.color_pin">
+	    <span class="help-inline">Pin of the LED Data Line</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="powerCtrl">{{ _('Power Control Pin Count #') }}</label>
+        <div class="controls">
+            <input type="number" class="input-block-level" id="powerCtrl" data-bind="value: settings.plugins.neopixellightcontrol.power_ctrl">
+	    <span class="help-inline">Power Control Pin Number</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="ledCount">{{ _('LED Count #') }}</label>
+        <div class="controls">
+            <input type="number" class="input-block-level" id="ledCount" data-bind="value: settings.plugins.neopixellightcontrol.led_count">
+	    <span class="help-inline">Number of LEDs</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="ledDMA">{{ _('LED DMA #') }}</label>
+        <div class="controls">
+            <input type="number" class="input-block-level" id="ledDMA" data-bind="value: settings.plugins.neopixellightcontrol.led_dma">
+	    <span class="help-inline">DMA channel to use for generating signal</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="ledBrightness">{{ _('LED Brightness') }}</label>
+        <div class="controls">
+            <input type="number" class="input-block-level" id="ledBrightness" data-bind="value: settings.plugins.neopixellightcontrol.led_brightness">
+            <span class="help-inline">Set to 0 for darkest and 255 for brightest</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="ledChannel">{{ _('LED channel') }}</label>
+        <div class="controls">
+            <input type="number" class="input-block-level" id="ledChannel" data-bind="value: settings.plugins.neopixellightcontrol.led_channel">
+	    <span class="help-inline">Set to '1' for GPIOs 13, 19, 41, 45 or 53 (Default is '0')</span>
+        </div>
+    </div>
+
+</form>
+
+
+
+

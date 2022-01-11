@@ -1,0 +1,4 @@
+include README.md
+recursive-include octoprint_neopixellightcontrol/templates *
+recursive-include octoprint_neopixellightcontrol/translations *
+recursive-include octoprint_neopixellightcontrol/static *
