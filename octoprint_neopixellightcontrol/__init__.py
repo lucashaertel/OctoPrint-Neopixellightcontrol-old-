@@ -44,7 +44,7 @@ class NeopixellightcontrolPlugin(octoprint.plugin.StartupPlugin,
 
     def update_rgb(self, colorHex, is_on):
         if(self.strip is not None):
-            rgb = hex_to_rgb(colorHex)
+            rgb = self.hex_to_rgb(colorHex)
             self._logger.info("RGB Value: " + rgb)
             r = rgb[0]
             self._logger.info("R Value: " + r)
@@ -166,7 +166,7 @@ class NeopixellightcontrolPlugin(octoprint.plugin.StartupPlugin,
             self.is_on = False
         self.update_rgb(self.color, self.is_on)
 
-    def hex_to_rgb(value):
+    def hex_to_rgb(self, value):
         value = value.lstrip('#')
         value = len(value)
         return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
