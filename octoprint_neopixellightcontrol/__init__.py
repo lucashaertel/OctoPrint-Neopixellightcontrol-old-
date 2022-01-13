@@ -23,20 +23,23 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
         self.is_on = False
 
     def init_rgb(self):
-        self._logger.info("LEDs initialized")
-        # self._logger.info("count " + self._settings.get_int(["led_count"]))
-        # self._logger.info("pin " + self._settings.get_int(["color_pin"]))
-        # self._logger.info("freq " + self._settings.get_int(["freqHz"]))
-        # self._logger.info("dma " + self._settings.get_int(["led_dma"]))
-        # self._logger.info("invert " + self._settings.get_boolean(["invert"]))
-        # self._logger.info(
-        #     "brightness " + self._settings.get_int(["led_brightness"]))
-        # self._logger.info(
-        #     "ledChannel " + self._settings.get_int(["led_channel"]))
-        # self.strip = Adafruit_NeoPixel(self._settings.get_int(["led_count"]), self._settings.get_int(["color_pin"]), self._settings.get_int(["freqHz"]),
-        #                                self._settings.get_int(["led_dma"]), self._settings.get_boolean(["invert"]), self._settings.get_int(["led_brightness"]), self._settings.get_int(["led_channel"]))
-        # self.strip.begin()
-        # self._logger.info("LEDs initialized")
+        try:
+                self._logger.info("LEDs initialized")
+                self._logger.info("count " + self._settings.get_int(["led_count"]))
+                self._logger.info("pin " + self._settings.get_int(["color_pin"]))
+                self._logger.info("freq " + self._settings.get_int(["freqHz"]))
+                self._logger.info("dma " + self._settings.get_int(["led_dma"]))
+                self._logger.info("invert " + self._settings.get_boolean(["invert"]))
+                self._logger.info(
+                    "brightness " + self._settings.get_int(["led_brightness"]))
+                self._logger.info(
+                    "ledChannel " + self._settings.get_int(["led_channel"]))
+                # self.strip = Adafruit_NeoPixel(self._settings.get_int(["led_count"]), self._settings.get_int(["color_pin"]), self._settings.get_int(["freqHz"]),
+                #                                self._settings.get_int(["led_dma"]), self._settings.get_boolean(["invert"]), self._settings.get_int(["led_brightness"]), self._settings.get_int(["led_channel"]))
+                # self.strip.begin()
+                # self._logger.info("LEDs initialized")
+        except Exception as e:
+               self._logger.error(e) 
 
     def update_rgb(self, colorHex, is_on):
         if(self.strip is not None):
