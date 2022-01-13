@@ -23,6 +23,13 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
         self.is_on = False
 
     def init_rgb(self):
+        self._logger.info("count " + self.ledCount)
+        self._logger.info("pin " + self.colorPin)
+        self._logger.info("freq " + self.freqHz)
+        self._logger.info("dma " + self.dmaChannel)
+        self._logger.info("invert " + self.invert)
+        self._logger.info("brightness " + self.brightness)
+        self._logger.info("ledChannel " + self.dmaChannel)
         self.strip = Adafruit_NeoPixel(self.ledCount, self.colorPin, self.freqHz,
                                        self.dmaChannel, self.invert, self.brightness, self.ledChannel)
         self.strip.begin()
@@ -46,6 +53,15 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
     def on_settings_save(self, data):
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
         self._logger.info("On save triggered")
+        self.colorPin = self._settings.get_int(["color_pin"])
+        self.powerPin = self._settings.get_int(["power_ctrl"])
+        self.color = self._settings.get(["color"])
+        self.ledCount = self._settings.get_int(["led_count"])
+        self.dmaChannel = self._settings.get_int(["led_dma"])
+        self.brightness = self._settings.get_int(["led_brightness"])
+        self.ledChannel = self._settings.get_int(["led_channel"])
+        self.is_on = self._settings.get_boolean(["is_on"])
+        self.init_rgb()
 
     def get_settings_defaults(self):
         return dict(
@@ -84,6 +100,7 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
         )
 
     def on_api_command(self, command, data):
+        self._logger.info("CMD: " + command)
         if command == "update_color":
             color = data.get('color', None)
             if color != None:
@@ -92,7 +109,7 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
             self.is_on = True
         elif command == "turn_off":
             self.is_on = False
-        self.update_rgb(self.color, self.is_on)
+        # self.update_rgb(self.color, self.is_on)
 
     def hex_to_rgb(self, value):
         value = value.lstrip('#')
