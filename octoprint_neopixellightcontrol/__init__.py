@@ -4,8 +4,7 @@ import octoprint.plugin
 from rpi_ws281x import *
 
 
-class NeopixellightcontrolPlugin(octoprint.plugin.StartupPlugin,
-                                 octoprint.plugin.SettingsPlugin,
+class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
                                  octoprint.plugin.AssetPlugin,
                                  octoprint.plugin.TemplatePlugin,
                                  octoprint.plugin.SimpleApiPlugin):
@@ -24,23 +23,10 @@ class NeopixellightcontrolPlugin(octoprint.plugin.StartupPlugin,
         self.is_on = False
 
     def init_rgb(self):
-        try:
-            self.deinit_rgb()
-            self.strip = Adafruit_NeoPixel(
-                self.ledCount, self.colorPin, self.freqHz, self.dmaChannel, self.invert, self.brightness, self.ledChannel)
-            self.strip.begin()
-            self._logger.info("LEDs initialized")
-        except:
-            self._logger.error("Error occurred while initializing LEDs")
-
-    def deinit_rgb(self):
-        try:
-            if(self.strip is not None):
-                self.strip._cleanup()
-                self.led = None
-                self._logger.info("LEDs deinitialized")
-        except:
-            self._logger.error("Error occurred while deinitializing LEDs")
+        self.strip = Adafruit_NeoPixel(self.ledCount, self.colorPin, self.freqHz,
+                                       self.dmaChannel, self.invert, self.brightness, self.ledChannel)
+        self.strip.begin()
+        self._logger.info("LEDs initialized")
 
     def update_rgb(self, colorHex, is_on):
         if(self.strip is not None):
@@ -57,79 +43,21 @@ class NeopixellightcontrolPlugin(octoprint.plugin.StartupPlugin,
         else:
             self._logger.error("Error occurred while updating RGB state")
 
-    def on_after_startup(self):
-        colorPin = self._settings.get_int(["color_pin"])
-        if colorPin is not None:
-            self.colorPin = colorPin
-        powerPin = self._settings.get_int(["power_ctrl"])
-        if powerPin is not None:
-            self.powerPin = powerPin
-        color = self._settings.get(["color"])
-        if color is not None:
-            self.color = color
-        ledCount = self._settings.get_int(["led_count"])
-        if ledCount is not None:
-            self.ledCount = ledCount
-        dmaChannel = self._settings.get_int(["led_dma"])
-        if dmaChannel is not None:
-            self.dmaChannel = dmaChannel
-        brightness = self._settings.get_int(["led_brightness"])
-        if brightness is not None:
-            self.brightness = brightness
-        ledChannel = self._settings.get_int(["led_channel"])
-        if ledChannel is not None:
-            self.ledChannel = ledChannel
-        is_on = self._settings.get_boolean(["is_on"])
-        if is_on is not None:
-            self.is_on = is_on
-        if colorPin is not None and color is not None and ledCount is not None and dmaChannel is not None and brightness is not None and ledChannel is not None:
-            self.init_rgb()
-        if is_on is not None and color is not None:
-            self.update_rgb(self.color, self.is_on)
-        #self._plugin_manager.send_plugin_message(self._identifier, dict(is_on=self.is_on, color=self.color))
-
     def on_settings_save(self, data):
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
-        colorPin = self._settings.get_int(["color_pin"])
-        if colorPin is not None:
-            self.colorPin = colorPin
-        powerPin = self._settings.get_int(["power_ctrl"])
-        if powerPin is not None:
-            self.powerPin = powerPin
-        color = self._settings.get(["color"])
-        if color is not None:
-            self.color = color
-        ledCount = self._settings.get_int(["led_count"])
-        if ledCount is not None:
-            self.ledCount = ledCount
-        dmaChannel = self._settings.get_int(["led_dma"])
-        if dmaChannel is not None:
-            self.dmaChannel = dmaChannel
-        brightness = self._settings.get_int(["led_brightness"])
-        if brightness is not None:
-            self.brightness = brightness
-        ledChannel = self._settings.get_int(["led_channel"])
-        if ledChannel is not None:
-            self.ledChannel = ledChannel
-        is_on = self._settings.get_boolean(["is_on"])
-        if is_on is not None:
-            self.is_on = is_on
-        if colorPin is not None and color is not None and ledCount is not None and dmaChannel is not None and brightness is not None and ledChannel is not None:
-            self.init_rgb()
-        if is_on is not None and color is not None:
-            self.update_rgb(self.color, self.is_on)
+        self._logger.info("On save triggered")
 
     def get_settings_defaults(self):
         return dict(
             strip=None,
-            colorPin=18,
-            powerPin=20,
+            color_pin=18,
+            power_ctrl=20,
             color='#FFFFFF',
-            ledCount=0,
-            dmaChannel=10,
+            led_count=0,
+            led_dma=10,
             freqHz=800000,
-            brightness=0,
-            ledChannel=0,
+            led_brightness=0,
+            led_channel=0,
             invert=False,
             is_on=False
         )
@@ -201,7 +129,7 @@ __plugin_name__ = "Neopixellightcontrol Plugin"
 # compatibility flags according to what Python versions your plugin supports!
 # __plugin_pythoncompat__ = ">=2.7,<3" # only python 2
 # __plugin_pythoncompat__ = ">=3,<4" # only python 3
-__plugin_pythoncompat__ = ">=2.7,<4" # python 2 and 3
+__plugin_pythoncompat__ = ">=2.7,<4"  # python 2 and 3
 
 
 def __plugin_load__():
