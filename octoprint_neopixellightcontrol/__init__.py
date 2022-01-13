@@ -34,10 +34,9 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
                     "brightness %s" % self._settings.get_int(["led_brightness"]))
                 self._logger.info(
                     "ledChannel %s" % self._settings.get_int(["led_channel"]))
-                # self.strip = Adafruit_NeoPixel(self._settings.get_int(["led_count"]), self._settings.get_int(["color_pin"]), self._settings.get_int(["freqHz"]),
-                #                                self._settings.get_int(["led_dma"]), self._settings.get_boolean(["invert"]), self._settings.get_int(["led_brightness"]), self._settings.get_int(["led_channel"]))
-                # self.strip.begin()
-                # self._logger.info("LEDs initialized")
+                self.strip = Adafruit_NeoPixel(self._settings.get_int(["led_count"]), self._settings.get_int(["color_pin"]), self._settings.get_int(["freqHz"]),
+                                               self._settings.get_int(["led_dma"]), self._settings.get_boolean(["invert"]), self._settings.get_int(["led_brightness"]), self._settings.get_int(["led_channel"]))
+                self.strip.begin()
         except Exception as e:
                self._logger.error(e) 
 
