@@ -24,15 +24,15 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
 
     def init_rgb(self):
         self._logger.info("LEDs initialized")
-        # self._logger.info("count " + self._settings.get_int(["led_count"]))
-        # self._logger.info("pin " + self._settings.get_int(["color_pin"]))
-        # self._logger.info("freq " + self._settings.get_int(["freqHz"]))
-        # self._logger.info("dma " + self._settings.get_int(["led_dma"]))
-        # self._logger.info("invert " + self._settings.get_boolean(["invert"]))
-        # self._logger.info(
-        #     "brightness " + self._settings.get_int(["led_brightness"]))
-        # self._logger.info(
-        #     "ledChannel " + self._settings.get_int(["led_channel"]))
+        self._logger.info("count " + self._settings.get_int(["led_count"]))
+        self._logger.info("pin " + self._settings.get_int(["color_pin"]))
+        self._logger.info("freq " + self._settings.get_int(["freqHz"]))
+        self._logger.info("dma " + self._settings.get_int(["led_dma"]))
+        self._logger.info("invert " + self._settings.get_boolean(["invert"]))
+        self._logger.info(
+            "brightness " + self._settings.get_int(["led_brightness"]))
+        self._logger.info(
+            "ledChannel " + self._settings.get_int(["led_channel"]))
         # self.strip = Adafruit_NeoPixel(self._settings.get_int(["led_count"]), self._settings.get_int(["color_pin"]), self._settings.get_int(["freqHz"]),
         #                                self._settings.get_int(["led_dma"]), self._settings.get_boolean(["invert"]), self._settings.get_int(["led_brightness"]), self._settings.get_int(["led_channel"]))
         # self.strip.begin()
@@ -74,7 +74,7 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
         is_on = self._settings.get_boolean(["is_on"])
         if is_on is not None:
                 self.is_on = is_on
-                self.init_rgb()
+        self.init_rgb()
 
     def get_assets(self):
         # Define your plugin's asset files to automatically include in the
