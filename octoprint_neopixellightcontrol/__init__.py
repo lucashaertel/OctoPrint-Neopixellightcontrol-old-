@@ -70,6 +70,9 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
     def on_settings_save(self, data):
         self._logger.info("on_settings_save")
         octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
+        is_on = self._settings.get_boolean(["is_on"])
+        if is_on is not None:
+                self.is_on = is_on
 
     def get_assets(self):
         # Define your plugin's asset files to automatically include in the
