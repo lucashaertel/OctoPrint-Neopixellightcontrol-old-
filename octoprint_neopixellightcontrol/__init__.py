@@ -55,8 +55,21 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
     def get_settings_defaults(self):
         return dict(
             strip=None,
+            color_pin=18,
+            power_ctrl=20,
+            color='#FFFFFF',
+            led_count=0,
+            led_dma=10,
+            freqHz=800000,
+            led_brightness=0,
+            led_channel=0,
+            invert=False,
             is_on=False
         )
+
+    def on_settings_save(self, data):
+        self._logger.info("on_settings_save")
+        octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
     def get_assets(self):
         # Define your plugin's asset files to automatically include in the
