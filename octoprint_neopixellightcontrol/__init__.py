@@ -73,6 +73,7 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
         is_on = self._settings.get_boolean(["is_on"])
         if is_on is not None:
                 self.is_on = is_on
+                self.init_rgb()
 
     def get_assets(self):
         # Define your plugin's asset files to automatically include in the
