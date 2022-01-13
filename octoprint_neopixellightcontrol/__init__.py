@@ -64,7 +64,7 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
         # self.brightness = self._settings.get_int(["led_brightness"])
         # self.ledChannel = self._settings.get_int(["led_channel"])
         # self.is_on = self._settings.get_boolean(["is_on"])
-        self._logger.info("triggering init")
+        self._logger.info("triggering init ...")
         self.init_rgb()
 
     def get_settings_defaults(self):
