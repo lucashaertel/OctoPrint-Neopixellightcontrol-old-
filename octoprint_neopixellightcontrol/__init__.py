@@ -54,18 +54,10 @@ class NeopixellightcontrolPlugin(octoprint.plugin.SettingsPlugin,
             self._logger.error("Error occurred while updating RGB state")
 
     def on_settings_save(self, data):
-        octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
-        # self._logger.info("On save triggered")
-        # self.colorPin = self._settings.get_int(["color_pin"])
-        # self.powerPin = self._settings.get_int(["power_ctrl"])
-        # self.color = self._settings.get(["color"])
-        # self.ledCount = self._settings.get_int(["led_count"])
-        # self.dmaChannel = self._settings.get_int(["led_dma"])
-        # self.brightness = self._settings.get_int(["led_brightness"])
-        # self.ledChannel = self._settings.get_int(["led_channel"])
-        # self.is_on = self._settings.get_boolean(["is_on"])
-        self._logger.info("triggering init ...")
+        self._logger.info("triggering init :(")
         self.init_rgb()
+        self._logger.info("triggered")
+
 
     def get_settings_defaults(self):
         return dict(
